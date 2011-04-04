@@ -25,7 +25,10 @@ class PaymentForm(forms.Form):
         params = self.cleaned_data
         params['creditcardtype'] = self.fields['acct'].card_type
         params['expdate'] = self.cleaned_data['expdate'].strftime("%m%Y")
-        params['ipaddress'] = request.META.get("REMOTE_ADDR", "")
+        try:
+            params['ipaddress'] = request.META["REMOTE_ADDR"]
+        except KeyError:
+            params['ipaddress'] = request.META.get("HTTP_X_FORWARDED_FOR", "0:0:0:0:0:0")
         params.update(item)
 
         try:
