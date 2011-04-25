@@ -60,6 +60,10 @@ class PayPalPaymentsForm(forms.Form):
     item_number = forms.CharField(widget=ValueHiddenInput())
     quantity = forms.CharField(widget=ValueHiddenInput())
     
+    # what type of payment (authorization, order)
+    # https://www.paypalobjects.com/en_US/ebook/PP_ExpressCheckout_IntegrationGuide/HowAuthCaptureWorks.html
+    paymentaction = forms.CharField(widget=ValueHiddenInput())
+    
     # Subscription Related.
     a1 = forms.CharField(widget=ValueHiddenInput())  # Trial 1 Price
     p1 = forms.CharField(widget=ValueHiddenInput())  # Trial 1 Duration
